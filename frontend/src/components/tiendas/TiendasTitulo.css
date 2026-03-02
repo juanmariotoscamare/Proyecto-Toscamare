@@ -13,7 +13,7 @@
     font-size: clamp(2rem, 5vw, 4rem);
     /* Fluid typography */
     font-weight: 700;
-    margin: 0 0 1rem 0;
+    margin: 4rem 0 1rem 0;
     letter-spacing: 1px;
     line-height: 1.1;
 }
