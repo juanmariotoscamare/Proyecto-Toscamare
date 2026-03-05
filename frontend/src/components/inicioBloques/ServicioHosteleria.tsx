@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import horeca from "../../assets/imagenes_home/image.png";
 import { Link } from "react-router-dom";
 
-=======
->>>>>>> 5cdc0537cf381c87a4c3e7e503e0f2919c871193
 const ServicioHosteleria = () => {
   const categorias = [
     { nombre: "Pescados", icono: "🐟" },
