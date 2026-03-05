@@ -23,9 +23,9 @@ export default function ContactoPage() {
       {/* Contact Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
             {/* Contact Form */}
-            <div className="lg:col-span-3">
+            <div>
               <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-2xl">Dinos en que te podemos ayudar</CardTitle>
@@ -40,7 +40,7 @@ export default function ContactoPage() {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-8 lg:col-span-2">
+            <div className="space-y-8">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground">
                   Información de contacto
