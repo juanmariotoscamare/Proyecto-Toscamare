@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 const CTA = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gray-50/50">
       <div className="max-w-5xl mx-auto px-6">
         <div
           className="bg-blue-900 rounded-3xl p-12 md:p-20 text-center shadow-2xl relative overflow-hidden"
@@ -17,15 +19,15 @@ const CTA = () => {
             </h2>
 
             <p className="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-              ¿Eres profesional de la hostelería o un particular amante de la
-              buena mesa? Ponte en contacto con nosotros y gestionaremos tu
-              pedido de forma directa y personalizada.
+              ¿Eres profesional de la hostelería o un particular amante de la buena cocina? 
+              Ponte en contacto con nosotros y gestionaremos tu pedido de forma directa 
+              y personalizada.
             </p>
 
             <div className="flex flex-col items-center gap-4 w-full px-4">
               {/* Botón de Contacto Adaptable */}
-              <a
-                href="/contacto"
+              <Link
+                to="/contacto"
                 className="bg-white text-blue-900 
                px-8 py-4 sm:px-10 sm:py-5 
                rounded-full font-bold 
@@ -53,7 +55,7 @@ const CTA = () => {
                   Contactar
                   <span className="hidden md:inline"> con nosotros</span>
                 </span>
-              </a>
+              </Link>
 
               <p className="text-blue-300 text-[10px] sm:text-xs mt-4 uppercase tracking-[0.2em] font-semibold text-center">
                 Servicio de atención preferente

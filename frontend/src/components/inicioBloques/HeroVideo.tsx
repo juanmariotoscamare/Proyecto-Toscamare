@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import img_para_cabecera from "../../assets/imagenes_home/img_para_cabecera.jpg";
+import video_para_cabecera_home from "../../assets/videos/video_para_cabecera_home.mp4";
 
 const HeroVideo = () => {
   return (
@@ -10,9 +12,9 @@ const HeroVideo = () => {
         loop
         muted
         playsInline
-        poster="https://images.unsplash.com/photo-15349386654201534938665420-4193effeacc4?q=80&w=2071"
+        poster={img_para_cabecera}
       >
-        <source src="/8879803-uhd_4096_2160_25fps.mp4" type="video/mp4" />
+        <source src={video_para_cabecera_home} type="video/mp4" />
       </video>
 
       {/* 2. LA CAPA OSCURA */}
@@ -33,20 +35,21 @@ const HeroVideo = () => {
         <h1
           data-aos="zoom-out"
           data-aos-duration="1200"
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 max-w-4xl leading-tight drop-shadow-lg"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 max-w-7xl leading-tight drop-shadow-lg"
         >
-          Excelencia en productos del mar y alimentación
+          Venta y distribución de alimentos al por mayor y al por menor en
+          Huelva
         </h1>
 
         {/* Subtítulo: Aparece desde abajo con un poco de retraso */}
-        <p
+        <h2
           data-aos="fade-up"
           data-aos-delay="600"
           className="text-gray-200 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed drop-shadow-md"
         >
-          Distribución mayorista y minorista en Huelva. Calidad, tradición y
-          servicio cercano en cada uno de nuestros productos.
-        </p>
+          Especialistas en pescados, carnes y productos congelados, con la
+          calidad, tradición y cercanía que nos caracterizan.
+        </h2>
 
         {/* Botones: Aparecen al final, cada uno desde un lado diferente */}
         <div className="flex flex-col sm:flex-row gap-4">

@@ -4,8 +4,8 @@ const Hero = () => {
       {/* Capa de Imagen de Fondo */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://laroussecocina.mx/wp-content/uploads/2020/12/Atun.jpg.webp"
-          alt="Fondo Toscamare"
+          src="/src/assets/fotos_sobre_nosotros/sede central.png"
+          alt="Sede Central Toscamare"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
@@ -17,17 +17,16 @@ const Hero = () => {
         data-aos="fade-up"
         data-aos-duration="1000"
       >
-        <h1 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter mb-6">
-          Bienvenidos a <span className="text-blue-200">Toscamare</span>
+        <h1 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-[0.2em] mb-6">
+          Bienvenidos a <br className="md:hidden" /><span className="text-blue-200">Toscamare</span>
         </h1>
 
         <div className="w-24 h-1 bg-blue-400 mx-auto mb-8"></div>
 
         <p className="text-white text-lg md:text-2xl leading-relaxed font-light">
-          En <span className="font-semibold text-blue-100">Toscamare</span> nos
-          dedicamos a la venta y distribución de pescados, carnes, mariscos y
-          productos congelados, tanto al por mayor como al por menor, ofreciendo
-          productos frescos, de calidad y adaptados a cada cliente desde{" "}
+          Nos dedicamos a la venta y distribución de pescados, carnes, mariscos y
+          productos congelados, tanto al por mayor como al por menor. Ofrecemos
+          productos congelados y frescos, de calidad y adaptados a cada cliente desde{" "}
           <span className="font-semibold text-blue-100">1990</span>.
         </p>
       </div>

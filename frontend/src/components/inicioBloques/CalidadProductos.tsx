@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import mojama from "../../assets/imagenes_home/foto mojama temporal.png";
 
 const CalidadProductos = () => {
   return (
@@ -16,7 +17,7 @@ const CalidadProductos = () => {
               data-aos="zoom-in"
               className="inline-block py-1 px-3 rounded-full bg-[#E5F6FD] text-[#0460A9] text-xs font-bold uppercase tracking-wider mb-4"
             >
-              Producción Propia
+              ELABORACIÓN PROPIA
             </span>
 
             <h2
@@ -48,10 +49,11 @@ const CalidadProductos = () => {
                   className="w-10 h-10"
                   fill="currentColor"
                   viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fillRule="evenodd"
-                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 001-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.64.3 1.241.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -106,7 +108,7 @@ const CalidadProductos = () => {
               className="relative rounded-2xl overflow-hidden shadow-2xl z-10"
             >
               <img
-                src="https://productimages.etrusted.com/products/prt-0cdc40dd-9000-4a0d-a362-db5ecddaaceb/35/original.jpg"
+                src={mojama}
                 alt="Mojama de atún de calidad superior"
                 className="w-full h-[400px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -118,13 +120,13 @@ const CalidadProductos = () => {
                 className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-md border border-gray-100"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl animate-bounce">🏆</span>
+                  <span className="text-2xl animate-bounce">🏅</span>
                   <div>
                     <p className="text-xs text-gray-500 uppercase font-bold">
                       Galardón
                     </p>
                     <p className="text-[#011468] font-bold text-sm">
-                      Calidad Certificada
+                      Calidad garantizada
                     </p>
                   </div>
                 </div>

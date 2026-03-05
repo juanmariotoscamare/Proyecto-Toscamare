@@ -22,18 +22,18 @@ const NuestraEsencia = () => {
 
             <div className="space-y-6 text-gray-600 leading-relaxed text-lg text-justify">
               <p>
-                Con más de tres décadas de trayectoria, suministramos a
-                hostelería, restauración, catering y tiendas especializadas,
-                asegurando frescura, calidad y servicio personalizado.
+                Desde hace más de tres décadas, suministramos a hostelería,
+                restauración y catering, asegurando la calidad de nuestros
+                productos con un servicio personalizado a las necesidades de
+                cada cliente.
               </p>
 
               <p>
-                Contamos con{" "}
-                <span className="text-blue-900 font-semibold">
-                  almacenamiento frigorífico propio y flota de transporte
-                </span>
-                , garantizando que cada producto llegue en perfectas condiciones
-                a su destino, manteniendo la cadena de frío en todo momento.
+                Contamos con almacenes frigoríficos, cámaras de ultracongelación
+                y de refrigeración para garantizar el mantenimiento de cada
+                producto. Además, contamos con una flota propia de transporte de
+                mercancías alimentarias, que ayudan a mantener la cadena de frío
+                del producto en todo momento.
               </p>
             </div>
 
@@ -51,14 +51,18 @@ const NuestraEsencia = () => {
             data-aos-delay="400"
           >
             <div className="relative group">
-              {/* Elemento decorativo detrás */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-50 -z-10 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
-
-              <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
-                alt="Logística y flota Toscamare"
-                className="rounded-2xl shadow-2xl w-full h-[480px] object-cover border-white border-8"
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src="/src/assets/fotos_sobre_nosotros/sala inicial almacen.png"
+                  alt="Almacén Toscamare"
+                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 -rotate-2 hover:rotate-0 transition-transform duration-500"
+                />
+                <img
+                  src="/src/assets/fotos_sobre_nosotros/camion toscamare.png"
+                  alt="Flota Toscamare"
+                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 rotate-2 hover:rotate-0 transition-transform duration-500 mt-4 md:mt-10"
+                />
+              </div>
 
               {/* Badge flotante */}
               <div className="absolute -bottom-6 left-10 bg-white shadow-xl p-6 rounded-lg hidden md:block border-b-4 border-blue-600">

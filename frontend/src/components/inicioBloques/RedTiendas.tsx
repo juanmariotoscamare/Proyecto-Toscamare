@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import foto_bloque_tiendas from "../../assets/imagenes_home/foto bloque tiendas.png";
 
 const RedTiendas = () => {
   const beneficios = [
-    "Atención cercana en cada tienda",
+    "Atención personalizada en cada tienda",
     "Servicio rápido y profesional",
-    "Asesoramiento experto al cliente",
-    "Calidad y trato personalizado",
+    "Productos de la mejor calidad",
+    "Trato cercano a cada cliente",
   ];
 
   return (
@@ -16,7 +17,7 @@ const RedTiendas = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* --- COLUMNA IMAGEN (Izquierda) --- */}
           <div className="order-1 relative group">
-            {/* Marco decorativo unificado con el estilo de la Portada */}
+            {/* Marco decorativo unificado con el estilo de Anedilco */}
             <div
               data-aos="zoom-in"
               data-aos-delay="200"
@@ -29,21 +30,21 @@ const RedTiendas = () => {
               className="relative rounded-2xl overflow-hidden shadow-2xl z-10 border-8 border-white"
             >
               <img
-                src="https://www.recetasderechupete.com/wp-content/uploads/2023/12/Patatas-fritas-al-horno-portada-1200x828.jpg"
+                src={foto_bloque_tiendas}
                 alt="Tienda Toscamare en Huelva"
                 className="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
               />
 
-              {/* Badge de localización estilo Portada */}
+              {/* Badge de localización estilo Anedilco */}
               <div
                 data-aos="fade-left"
                 data-aos-delay="800"
                 className="absolute bottom-6 right-6 bg-[#011468] text-white p-5 rounded-xl shadow-2xl"
               >
-                <p className="font-bold text-xl tracking-tight leading-none">
-                  Huelva
+                <p className="font-bold text-xl tracking-tight leading-none text-center">
+                  📍Huelva
                 </p>
-                <p className="text-[10px] text-[#57C3ED] uppercase font-bold tracking-widest mt-1">
+                <p className="text-[10px] text-[#57C3ED] uppercase font-bold tracking-widest mt-1 text-center">
                   20 Puntos de venta
                 </p>
               </div>
@@ -65,7 +66,7 @@ const RedTiendas = () => {
               data-aos-delay="200"
               className="text-3xl md:text-5xl font-bold text-[#011468] mb-8 leading-tight"
             >
-              Contamos con 20 Tiendas en la provincia de Huelva
+              Contamos con 20 tiendas en la provincia de Huelva
             </h2>
 
             <p
@@ -74,8 +75,9 @@ const RedTiendas = () => {
               className="text-gray-600 text-lg mb-10 leading-relaxed"
             >
               Ponemos a tu disposición una amplia red de tiendas para que puedas
-              disfrutar de nuestros productos con cercanía y comodidad. En cada
-              punto de venta ofrecemos atención personalizada.
+              disfrutar de nuestros productos con la mayor cercanía y comodidad.
+              En cada uno de nuestros puntos de venta, ofrecemos atención
+              personalizada por parte de nuestros profesionales.
             </p>
 
             {/* Lista de Beneficios */}
@@ -102,7 +104,7 @@ const RedTiendas = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-[#011468] font-semibold text-sm leading-snug">
+                  <span className="text-[#011468] font-semibold text-[13px]">
                     {item}
                   </span>
                 </li>
