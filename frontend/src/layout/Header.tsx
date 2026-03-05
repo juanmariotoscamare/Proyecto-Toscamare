@@ -22,7 +22,7 @@ function Header({ links }: HeaderProps) {
 
   const handleLogoClick = () => {
     if (window.location.pathname === "/") {
-      window.location.reload();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       navigate("/");
     }

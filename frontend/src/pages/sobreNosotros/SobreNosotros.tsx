@@ -9,8 +9,8 @@ const SobreNosotros = () => {
     <div className="bg-white">
       <Hero />
       <Trayectoria />
-      <PremiosAtun />
       <ProductosCalidad />
+      <PremiosAtun />
       <CTA />
     </div>
   );

@@ -1,6 +1,6 @@
 const LogisticaCompromiso = () => {
   return (
-    <section className="py-24 lg:py-32 bg-gray-50/50">
+    <section className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row-reverse items-center gap-16">
           {/* Texto (Entra desde la derecha) */}
@@ -22,21 +22,20 @@ const LogisticaCompromiso = () => {
 
             <div className="space-y-6 text-gray-600 leading-relaxed text-lg text-justify">
               <p>
-                Entre todos nuestros productos destaca el{" "}
+                Uno de nuestros productos más destacados es el{" "}
                 <span className="text-blue-900 font-bold">atún</span>,
-                catalogado como uno de los más valorados por nuestros clientes
-                gracias a su sabor, textura y frescura.
+                que elaboramos en nuestras instalaciones en distintas variedades 
+                tanto frescos y congelados como en embutidos por salación y curación.
               </p>
 
               <p className="italic">
-                Con esta especialidad hemos recibido reconocimientos en eventos
-                como los **Encuentros de Capitanes de la Almadraba de Isla
-                Cristina**, ganando premios en la categoría de{" "}
+                Nuestra mojama de atún fue reconocida como{" "}
                 <span className="text-blue-900 font-bold">
                   “Mejor Mojama de Atún”
-                </span>
-                , lo que certifica nuestro compromiso con la excelencia del
-                producto.
+                </span>{" "}
+                en el año 2022 en el XX Encuentro de Capitanes de Almadraba de 
+                las Jornadas de Arráez y Sotarráez. Un premio que certifica la 
+                calidad de los productos que elaboramos diariamente.
               </p>
             </div>
 
@@ -87,8 +86,8 @@ const LogisticaCompromiso = () => {
                 </span>
               </div>
               <img
-                src="https://productimages.etrusted.com/products/prt-0cdc40dd-9000-4a0d-a362-db5ecddaaceb/35/original.jpg"
-                alt="Calidad reconocida Atún Toscamare"
+                src="/src/assets/fotos_sobre_nosotros/foto mojama temporal (2).png"
+                alt="Calidad reconocida Mojama Toscamare"
                 className="rounded-2xl shadow-2xl w-full h-[500px] object-cover border-white border-8"
               />
             </div>

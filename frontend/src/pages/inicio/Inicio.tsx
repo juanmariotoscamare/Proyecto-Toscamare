@@ -1,5 +1,5 @@
 import CarruselMarcas from "../../components/inicioBloques/CarruselMarcas";
-import Portada from "../../components/inicioBloques/Portada";
+import Anedilco from "../../components/inicioBloques/Anedilco";
 import RedTiendas from "../../components/inicioBloques/RedTiendas";
 import CalidadProductos from "../../components/inicioBloques/CalidadProductos";
 import ServicioHosteleria from "../../components/inicioBloques/ServicioHosteleria";
@@ -10,11 +10,11 @@ const Inicio = () => {
   return (
     <div>
       <HeroVideo />
-      <Portada />
-      <RedTiendas />
-      <CalidadProductos />
       <ServicioHosteleria />
+      <RedTiendas />
       <CarruselMarcas />
+      <CalidadProductos />
+      <Anedilco />
       <SeccionContacto />
     </div>
   );

@@ -1,3 +1,6 @@
+import horeca from "../../assets/imagenes_home/image.png";
+import { Link } from "react-router-dom";
+
 const ServicioHosteleria = () => {
   const categorias = [
     { nombre: "Pescados", icono: "🐟" },
@@ -28,7 +31,7 @@ const ServicioHosteleria = () => {
               className="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white/10"
             >
               <img
-                src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop"
+                src={horeca}
                 alt="Servicio profesional a hostelería"
                 className="w-full h-[450px] lg:h-[550px] object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
               />
@@ -39,11 +42,8 @@ const ServicioHosteleria = () => {
                 data-aos-delay="600"
                 className="absolute bottom-6 right-6 bg-white text-[#011468] p-6 rounded-xl shadow-2xl max-w-[220px]"
               >
-                <p className="font-bold text-xl leading-tight">
-                  Distribución Diaria
-                </p>
-                <p className="text-[10px] text-[#D90414] uppercase font-bold tracking-widest mt-2">
-                  Cadena de frío
+                <p className="font-bold text-[14px] leading-tight">
+                  Distribución diaria desde la provincia de Huelva
                 </p>
               </div>
             </div>
@@ -55,16 +55,16 @@ const ServicioHosteleria = () => {
             <div className="flex items-center gap-3 mb-6" data-aos="fade-down">
               <div className="h-px w-10 bg-[#57C3ED]"></div>
               <span className="text-[#57C3ED] font-bold uppercase tracking-[0.3em] text-xs">
-                Canal HORECA
+                Servicio por canal horeca
               </span>
             </div>
 
             <h2
               data-aos="fade-left"
               data-aos-delay="400"
-              className="text-3xl md:text-5xl font-bold mb-8 leading-tight"
+              className="text-3xl md:text-[42px] font-bold mb-8 leading-tight"
             >
-              Servicio integral a hoteles y restauración
+              Proveedor de alimentación para hostelería en Andalucía
             </h2>
 
             <p
@@ -72,10 +72,9 @@ const ServicioHosteleria = () => {
               data-aos-delay="500"
               className="text-gray-300 text-lg md:text-xl mb-10 leading-relaxed"
             >
-              Ofrecemos el mejor servicio de distribución de productos
-              alimentarios para el sector profesional. Garantizamos una cadena
-              de frío impecable y una amplia variedad de productos seleccionados
-              para tu cocina.
+              Especialistas en el suministro de productos alimentarios a
+              hoteles, restaurantes, bares y empresas de catering, garantizando
+              calidad, variedad y control total de la cadena de frío.
             </p>
 
             {/* Grid de iconos Categorías */}
@@ -103,8 +102,8 @@ const ServicioHosteleria = () => {
               data-aos-delay="1000"
               className="flex flex-col sm:flex-row gap-6 items-center sm:items-start"
             >
-              <a
-                href="mailto:pedidos@cialtoscamare.es?subject=Consulta Pedido Hostelería"
+              <Link
+                to="/contacto"
                 className="inline-flex items-center justify-center px-10 py-4 bg-[#D90414] hover:bg-[#b00310] text-white font-bold rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95"
               >
                 <svg
@@ -121,7 +120,7 @@ const ServicioHosteleria = () => {
                   />
                 </svg>
                 Haz tu pedido aquí
-              </a>
+              </Link>
 
               <p className="text-sm text-gray-400 font-medium">
                 Respuesta preferente <br className="hidden sm:block" /> en menos

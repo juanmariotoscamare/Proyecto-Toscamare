@@ -62,7 +62,7 @@ const SeccionContacto = () => {
               href="tel:+34959000000"
               className="text-xl font-black text-[#011468] hover:text-[#D90414] transition-colors"
             >
-              959 00 00 00
+              959 39 22 21
             </a>
           </div>
 
@@ -108,7 +108,7 @@ const SeccionContacto = () => {
           <div
             data-aos="fade-up"
             data-aos-delay="500"
-            className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-2xl border-b-8 border-transparent hover:border-[#D90414] transition-all duration-500 group text-center"
+            className="bg-white p-6 md:p-10 rounded-3xl shadow-sm hover:shadow-2xl border-b-8 border-transparent hover:border-[#D90414] transition-all duration-500 group text-center"
           >
             <div className="w-20 h-20 mx-auto bg-red-50 rounded-2xl flex items-center justify-center mb-8 group-hover:-rotate-12 transition-transform duration-300">
               <svg
@@ -134,8 +134,16 @@ const SeccionContacto = () => {
             <h3 className="text-2xl font-bold text-[#011468] mb-3">
               Visítanos
             </h3>
-            <p className="text-gray-400 mb-6 font-medium">Oficinas centrales</p>
-            <p className="text-xl font-black text-[#011468]">Huelva, España</p>
+            <p className="text-gray-400 mb-4 font-medium">Oficinas centrales</p>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Sector+Suelo+Sapu+I3+3+21450+Cartaya+Huelva" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block text-lg font-black text-[#011468] hover:text-[#D90414] transition-colors leading-snug"
+            >
+              Sector Suelo Sapu I3, 3 <br/>
+              <span className="text-base font-bold">21450 Cartaya, Huelva</span>
+            </a>
           </div>
         </div>
 
@@ -149,7 +157,7 @@ const SeccionContacto = () => {
             to="/contacto"
             className="inline-flex items-center justify-center px-12 py-5 bg-[#011468] text-white font-black rounded-full hover:bg-[#D90414] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95 tracking-wide"
           >
-            IR AL CONTACTO COMPLETO
+            IR AL CONTACTO
             <svg
               className="w-6 h-6 ml-3"
               fill="none"

@@ -1,57 +1,72 @@
 import LogoLoop from "../ui/LogoLoop/LogoLoop";
+import elPozo from "../../assets/logosColaboradores/elpozo.png";
+import famadesa from "../../assets/logosColaboradores/famadesa.png";
+import audens from "../../assets/logosColaboradores/audens.png";
+import eurofrits from "../../assets/logosColaboradores/eurofrits.png";
+import simons from "../../assets/logosColaboradores/simons.png";
+import laninadelsur from "../../assets/logosColaboradores/laniñadelsur.png";
+import elguijo from "../../assets/logosColaboradores/elguijo.png";
+import navarra from "../../assets/logosColaboradores/navarra.png";
+import mccain from "../../assets/logosColaboradores/mccain.png";
+import cabezuelo from "../../assets/logosColaboradores/logotipo-cabezuelo.svg";
 
 const CarruselMarcas = () => {
   const imageLogos = [
     {
-      src: "./logosColaboradores/elpozo.png",
+      src: elPozo,
       alt: "El Pozo",
       href: "https://www.elpozo.com/",
     },
     {
-      src: "./logosColaboradores/famadesa.png",
+      src: famadesa,
       alt: "Famadesa",
       href: "https://famadesa.es/",
     },
     {
-      src: "./logosColaboradores/audens.png",
+      src: audens,
       alt: "Audens Foods",
       href: "https://www.audensfood.com/",
     },
     {
-      src: "./logosColaboradores/eurofrits.png",
+      src: eurofrits,
       alt: "Eurofrits",
       href: "https://www.eurofrits.com/",
     },
     {
-      src: "./logosColaboradores/simons.png",
+      src: simons,
       alt: "Simon’s",
       href: "https://simonsfood.net/",
     },
     {
-      src: "./logosColaboradores/laniñadelsur.png",
+      src: laninadelsur,
       alt: "La Niña del Sur",
       href: "https://laninadelsur.com/",
     },
     {
-      src: "./logosColaboradores/elguijo.png",
+      src: elguijo,
       alt: "El Guijo",
       href: "https://www.dulcesguijo.com/",
     },
     {
-      src: "./logosColaboradores/navarra.png",
+      src: navarra,
       alt: "Congelados Navarra",
       href: "https://www.congeladosnavarra.com/es",
     },
     {
-      src: "./logosColaboradores/mccain.png",
+      src: mccain,
       alt: "McCain",
       href: "https://mccain.es/",
+    },
+    {
+      src: cabezuelo,
+      alt: "Congelados Cabezuelo",
+      href: "https://cabezuelofoods.com/",
     },
   ];
 
   return (
     /* py-24 lg:py-32 para igualar el espaciado vertical de LogisticaCompromiso */
-    <section className="py-24 lg:py-32 bg-white border-t border-gray-100 overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[#f4f9ff] border-t border-gray-100 overflow-hidden">
       {/* Contenedor estandarizado max-w-7xl mx-auto px-6 */}
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         {/* Badge superior opcional para máxima consistencia */}
@@ -61,7 +76,7 @@ const CarruselMarcas = () => {
         >
           <div className="h-px w-10 bg-blue-700"></div>
           <span className="text-blue-700 font-bold uppercase tracking-[0.3em] text-xs">
-            Alianzas Estratégicas
+            mejores marcas
           </span>
           <div className="h-px w-10 bg-blue-700"></div>
         </div>
@@ -92,8 +107,8 @@ const CarruselMarcas = () => {
         style={{ height: "180px" }}
       >
         {/* Degradados laterales optimizados */}
-        <div className="absolute top-0 left-0 z-10 h-full w-24 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 z-10 h-full w-24 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 left-0 z-10 h-full w-24 md:w-48 bg-gradient-to-r from-[#f4f9ff] via-[#f4f9ff]/80 to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 z-10 h-full w-24 md:w-48 bg-gradient-to-l from-[#f4f9ff] via-[#f4f9ff]/80 to-transparent pointer-events-none"></div>
 
         <LogoLoop
           logos={imageLogos}
@@ -116,7 +131,7 @@ const CarruselMarcas = () => {
         data-aos-offset="50"
       >
         <p className="inline-block text-[#D90414] font-bold uppercase text-xs tracking-[0.2em] border-b-2 border-[#D90414]/20 pb-2">
-          Y mucho más de 2.000 referencias…
+          Y mucho más de 1000 referencias…
         </p>
       </div>
     </section>

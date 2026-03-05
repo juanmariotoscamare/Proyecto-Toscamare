@@ -1,6 +1,6 @@
 const ReyCasaAtun = () => {
   return (
-    <section className="py-24 lg:py-32 bg-white">
+    <section className="py-24 lg:py-32 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16">
           {/* Texto (Entra desde la izquierda) */}
@@ -20,39 +20,17 @@ const ReyCasaAtun = () => {
               Garantizamos productos <br /> frescos a diario
             </h2>
 
-            <div className="space-y-6 text-gray-600 leading-relaxed text-lg text-justify">
+            <div className="space-y-6 text-gray-600 leading-relaxed text-lg text-justify mt-8">
               <p>
-                Ofrecemos productos de **frescura garantizada** y variedad
-                cuidada, combinando marcas líderes y productores artesanales,
-                para que tanto profesionales como consumidores disfruten del
-                mejor sabor y calidad del mar.
+                En nuestras veinte tiendas repartidas por la provincia de
+                Huelva, ofrecemos una gran variedad de productos de las mejores
+                marcas y productos frescos diarios.
               </p>
 
               <p>
-                Nuestra selección diaria en lonja y con proveedores de confianza
-                asegura que cada pieza que sale de nuestras instalaciones cumpla
-                con los estándares más exigentes del sector.
+                Contamos con la mejor selección diaria de pescados adquiridos en
+                lonjas locales con la mejor calidad en cada pieza.
               </p>
-            </div>
-
-            <div className="mt-10 flex items-center gap-6">
-              <div className="flex flex-col">
-                <span className="text-blue-900 font-bold text-xl leading-none">
-                  100%
-                </span>
-                <span className="text-gray-400 text-[10px] uppercase tracking-widest mt-1">
-                  Calidad Controlada
-                </span>
-              </div>
-              <div className="h-8 w-px bg-gray-200"></div>
-              <div className="flex flex-col">
-                <span className="text-blue-900 font-bold text-xl leading-none">
-                  Fresco
-                </span>
-                <span className="text-gray-400 text-[10px] uppercase tracking-widest mt-1">
-                  Origen Certificado
-                </span>
-              </div>
             </div>
           </div>
 
@@ -67,8 +45,8 @@ const ReyCasaAtun = () => {
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-50 -z-10 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
 
               <img
-                src="https://adamecongelados.com/wp-content/uploads/2020/04/alimentos-frescos-o-congelados-1.png"
-                alt="Variedad de productos frescos Toscamare"
+                src="/src/assets/fotos_sobre_nosotros/sardinas lonja.jpg"
+                alt="Sardinas de lonja Toscamare"
                 className="rounded-2xl shadow-2xl w-full h-[500px] object-cover border-white border-8"
               />
             </div>

@@ -1,5 +1,8 @@
 import "./TiendasIntroduccion.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+const MotionLink = motion(Link);
 
 function TiendasIntroduccion() {
   const containerVariants = {
@@ -79,15 +82,15 @@ function TiendasIntroduccion() {
             <span className="intro-time">9:00 - 14:00</span>
           </div>
         </div>
-        <motion.a 
-          href="/contacto" 
+        <MotionLink 
+          to="/contacto" 
           className="intro-help"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
           ¿Necesitas más información?<br />
           <span>Estamos aquí para ayudarte</span>
-        </motion.a>
+        </MotionLink>
       </motion.div>
     </section>
   );

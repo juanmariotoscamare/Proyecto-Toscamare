@@ -1,7 +1,9 @@
 import Carousel from "./Carousel"
 import './CardsTiendas.css';
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
+const MotionLink = motion(Link);
 
 function CardsTiendas() {
     return (
@@ -39,8 +41,8 @@ function CardsTiendas() {
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             >
                 <span className="contact-cta-lead">¿Tienes dudas o necesitas más información?</span>
-                <motion.a 
-                    href="/contacto" 
+                <MotionLink 
+                    to="/contacto" 
                     className="contact-cta-button refined"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}
@@ -61,7 +63,7 @@ function CardsTiendas() {
                         <path d="M5.5 11H16.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         <path d="M12.5 7L16.5 11L12.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </motion.svg>
-                </motion.a>
+                </MotionLink>
                 <div className="contact-cta-subtext">Te responderemos lo antes posible.</div>
             </motion.div>
         </section>
