@@ -1,4 +1,4 @@
-import imgMojama from "../../assets/fotos_sobre_nosotros/foto mojama temporal (2).png";
+import imgMojama from "../../assets/fotos_sobre_nosotros/foto mojama temporal (2).webp";
 
 const LogisticaCompromiso = () => {
   return (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import mojama from "../../assets/imagenes_home/foto mojama temporal.png";
+import mojama from "../../assets/imagenes_home/foto mojama temporal.webp";
 
 const CalidadProductos = () => {
   return (

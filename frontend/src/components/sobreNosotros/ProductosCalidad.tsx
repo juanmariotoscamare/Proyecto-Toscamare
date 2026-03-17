@@ -1,4 +1,4 @@
-import imgSardinas from "../../assets/fotos_sobre_nosotros/sardinas lonja.jpg";
+import imgSardinas from "../../assets/fotos_sobre_nosotros/sardinas lonja.webp";
 
 const ReyCasaAtun = () => {
   return (

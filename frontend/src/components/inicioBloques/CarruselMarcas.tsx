@@ -1,14 +1,14 @@
 import LogoLoop from "../ui/LogoLoop/LogoLoop";
-import elPozo from "../../assets/logosColaboradores/elpozo.png";
-import famadesa from "../../assets/logosColaboradores/famadesa.png";
-import audens from "../../assets/logosColaboradores/audens.png";
-import eurofrits from "../../assets/logosColaboradores/eurofrits.png";
-import simons from "../../assets/logosColaboradores/simons.png";
-import laninadelsur from "../../assets/logosColaboradores/laniñadelsur.png";
-import elguijo from "../../assets/logosColaboradores/elguijo.png";
-import navarra from "../../assets/logosColaboradores/navarra.png";
-import mccain from "../../assets/logosColaboradores/mccain.png";
-import cabezuelo from "../../assets/logosColaboradores/logotipo-cabezuelo.svg";
+import elPozo from "../../assets/logosColaboradores/elpozo.webp";
+import famadesa from "../../assets/logosColaboradores/famadesa.webp";
+import audens from "../../assets/logosColaboradores/audens.webp";
+import eurofrits from "../../assets/logosColaboradores/eurofrits.webp";
+import simons from "../../assets/logosColaboradores/simons.webp";
+import laninadelsur from "../../assets/logosColaboradores/laniñadelsur.webp";
+import elguijo from "../../assets/logosColaboradores/elguijo.webp";
+import navarra from "../../assets/logosColaboradores/navarra.webp";
+import mccain from "../../assets/logosColaboradores/mccain.webp";
+import cabezuelo from "../../assets/logosColaboradores/logotipo-cabezuelo.webp";
 
 const CarruselMarcas = () => {
   const imageLogos = [

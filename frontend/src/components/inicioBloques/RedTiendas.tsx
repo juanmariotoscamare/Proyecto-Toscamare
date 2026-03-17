@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import foto_bloque_tiendas from "../../assets/imagenes_home/foto bloque tiendas.png";
+import foto_bloque_tiendas from "../../assets/imagenes_home/foto bloque tiendas.webp";
 
 const RedTiendas = () => {
   const beneficios = [

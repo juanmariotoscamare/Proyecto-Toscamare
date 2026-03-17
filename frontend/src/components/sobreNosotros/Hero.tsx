@@ -1,4 +1,4 @@
-import heroBg from "../../assets/fotos_sobre_nosotros/sede central.png";
+import heroBg from "../../assets/fotos_sobre_nosotros/sede central.webp";
 
 const Hero = () => {
   return (

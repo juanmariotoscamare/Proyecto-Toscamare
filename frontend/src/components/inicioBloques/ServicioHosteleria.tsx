@@ -1,4 +1,4 @@
-import horeca from "../../assets/imagenes_home/image.png";
+import horeca from "../../assets/imagenes_home/image.webp";
 import { Link } from "react-router-dom";
 
 const ServicioHosteleria = () => {

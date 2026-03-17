@@ -9,27 +9,27 @@ import { ProductHero } from "../../components/productos/ProductHero";
 import { ScrollToTopButton } from "../../components/ui/ScrollToTopButton";
 import { ProductModal } from "../../components/productos/ProductModal";
 // Importación masiva de imágenes de categorías
-import ahumadosImg from "../../assets/imagenes_categorias/Ahumados y salazones.png";
-import embutidosImg from "../../assets/imagenes_categorias/Embutidos.png";
-import encurtidosImg from "../../assets/imagenes_categorias/Encurtidos.png";
-import frutasImg from "../../assets/imagenes_categorias/Frutas.png";
-import huevosImg from "../../assets/imagenes_categorias/Huevos.png";
-import mariscosImg from "../../assets/imagenes_categorias/Mariscos, moluscos y bivalvos.png";
-import monodosisImg from "../../assets/imagenes_categorias/Monodosis.png";
-import nataImg from "../../assets/imagenes_categorias/Nata.png";
-import patatasImg from "../../assets/imagenes_categorias/Patatas.png";
-import pescadosImg from "../../assets/imagenes_categorias/Pescados.png";
-import precocinadosImg from "../../assets/imagenes_categorias/Precocinados.png";
-import preparadosVerdurasImg from "../../assets/imagenes_categorias/Preparados con verduras.png";
-import preparadosPostresImg from "../../assets/imagenes_categorias/Preparados para postres.png";
-import preparadosPizzasImg from "../../assets/imagenes_categorias/Preparados y pizzas.png";
-import perecederosImg from "../../assets/imagenes_categorias/Productos no perecederos.png";
-import quesosImg from "../../assets/imagenes_categorias/Quesos.png";
-import reposteriaImg from "../../assets/imagenes_categorias/Repostería.png";
-import salsasImg from "../../assets/imagenes_categorias/Salsas.png";
-import sinGlutenImg from "../../assets/imagenes_categorias/Sin glúten.png";
-import tematicosImg from "../../assets/imagenes_categorias/Temáticos.png";
-import verdurasImg from "../../assets/imagenes_categorias/Verduras.png";
+import ahumadosImg from "../../assets/imagenes_categorias/Ahumados y salazones.webp";
+import embutidosImg from "../../assets/imagenes_categorias/Embutidos.webp";
+import encurtidosImg from "../../assets/imagenes_categorias/Encurtidos.webp";
+import frutasImg from "../../assets/imagenes_categorias/Frutas.webp";
+import huevosImg from "../../assets/imagenes_categorias/Huevos.webp";
+import mariscosImg from "../../assets/imagenes_categorias/Mariscos, moluscos y bivalvos.webp";
+import monodosisImg from "../../assets/imagenes_categorias/Monodosis.webp";
+import nataImg from "../../assets/imagenes_categorias/Nata.webp";
+import patatasImg from "../../assets/imagenes_categorias/Patatas.webp";
+import pescadosImg from "../../assets/imagenes_categorias/Pescados.webp";
+import precocinadosImg from "../../assets/imagenes_categorias/Precocinados.webp";
+import preparadosVerdurasImg from "../../assets/imagenes_categorias/Preparados con verduras.webp";
+import preparadosPostresImg from "../../assets/imagenes_categorias/Preparados para postres.webp";
+import preparadosPizzasImg from "../../assets/imagenes_categorias/Preparados y pizzas.webp";
+import perecederosImg from "../../assets/imagenes_categorias/Productos no perecederos.webp";
+import quesosImg from "../../assets/imagenes_categorias/Quesos.webp";
+import reposteriaImg from "../../assets/imagenes_categorias/Repostería.webp";
+import salsasImg from "../../assets/imagenes_categorias/Salsas.webp";
+import sinGlutenImg from "../../assets/imagenes_categorias/Sin glúten.webp";
+import tematicosImg from "../../assets/imagenes_categorias/Temáticos.webp";
+import verdurasImg from "../../assets/imagenes_categorias/Verduras.webp";
 
 import AOS from "aos";
 
@@ -49,7 +49,7 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const itemsPerPage = 12;
+  const itemsPerPage = 30;
 
   useEffect(() => {
     const loadProducts = async () => {

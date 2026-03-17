@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import img_para_cabecera from "../../assets/imagenes_home/img_para_cabecera.jpg";
+import img_para_cabecera from "../../assets/imagenes_home/img_para_cabecera.webp";
 import video_forward from "../../assets/videos/video_para_cabecera_home.mp4";
 import video_reverse from "../../assets/videos/video_para_cabecera_reverse.mp4";
 

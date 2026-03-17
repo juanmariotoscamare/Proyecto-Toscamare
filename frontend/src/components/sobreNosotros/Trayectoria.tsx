@@ -1,5 +1,5 @@
-import imgAlmacen from "../../assets/fotos_sobre_nosotros/sala inicial almacen.png";
-import imgCamion from "../../assets/fotos_sobre_nosotros/camion toscamare.png";
+import imgAlmacen from "../../assets/fotos_sobre_nosotros/sala inicial almacen.webp";
+import imgCamion from "../../assets/fotos_sobre_nosotros/camion toscamare.webp";
 
 const NuestraEsencia = () => {
   return (
