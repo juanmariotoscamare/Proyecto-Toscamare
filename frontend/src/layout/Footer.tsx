@@ -12,6 +12,7 @@ interface FooterProps {
     contacto: string;
     avisoLegal: string;
     cookies: string;
+    productos: string;
   };
 }
 
@@ -53,6 +54,9 @@ function Footer({ links }: FooterProps) {
           </p>
           <p>
             <Link to={links.cookies}>Cookies</Link>
+          </p>
+          <p>
+            <Link to={links.productos}>Productos</Link>
           </p>
 
         </div>

@@ -10,6 +10,7 @@ interface HeaderProps {
     sobreNosotros: string;
     tiendas: string;
     contacto: string;
+    productos: string;
   };
 }
 
@@ -25,6 +26,14 @@ function Header({ links }: HeaderProps) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       navigate("/");
+    }
+  };
+
+  const handleProductsClick = () => {
+    if (window.location.pathname === "/productos") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate(links.productos);
     }
   };
 
@@ -94,8 +103,8 @@ function Header({ links }: HeaderProps) {
       </div>
 
       <div className="header-shop">
-        <button className="shop-button">
-          PRÓXIMAMENTE
+        <button className="shop-button" onClick={handleProductsClick}>
+          PRODUCTOS
           <FaShoppingCart />
         </button>
       </div>

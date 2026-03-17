@@ -54,10 +54,10 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:border-[#002B61] hover:text-[#002B61] transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95 hover:shadow-md group"
         >
           <svg
-            className="w-5 h-5 text-[#002B61]"
+            className="w-5 h-5 text-[#002B61] group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -79,10 +79,10 @@ export const Pagination = ({
               ) : (
                 <button
                   onClick={() => onPageChange(Number(page))}
-                  className={`w-9 h-9 md:w-10 md:h-10 rounded-lg font-bold transition-all text-sm md:text-base ${
+                  className={`w-9 h-9 md:w-10 md:h-10 rounded-lg font-bold transition-all duration-300 text-sm md:text-base cursor-pointer hover:scale-110 active:scale-95 ${
                     currentPage === page
-                      ? "bg-[#002B61] text-white shadow-md"
-                      : "text-[#002B61] hover:bg-blue-50"
+                      ? "bg-[#002B61] text-white shadow-xl scale-105"
+                      : "text-[#002B61] hover:bg-white hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37]/30 hover:shadow-md"
                   }`}
                 >
                   {page}
@@ -95,10 +95,10 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:border-[#002B61] hover:text-[#002B61] transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95 hover:shadow-md group"
         >
           <svg
-            className="w-5 h-5 text-[#002B61]"
+            className="w-5 h-5 text-[#002B61] group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -132,7 +132,7 @@ export const Pagination = ({
         </div>
         <button
           type="submit"
-          className="h-10 px-4 bg-[#002B61] text-white rounded-lg text-sm font-bold hover:bg-[#001f46] transition-colors"
+          className="h-10 px-6 bg-[#002B61] text-white rounded-lg text-sm font-bold hover:bg-[#D4AF37] transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
         >
           Ir
         </button>

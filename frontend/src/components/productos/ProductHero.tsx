@@ -8,7 +8,7 @@ export const ProductHero = () => {
     <section
       className="relative w-full text-center overflow-visible border-none
       bg-[linear-gradient(135deg,#061a66_0%,#1a4186_100%)] 
-      pt-[80px] px-4 pb-[120px] md:pt-[100px] md:pb-[140px]"
+      pt-[120px] px-4 pb-[120px] md:pt-[150px] md:pb-[140px]"
     >
       <div className="relative z-10 max-w-7xl mx-auto">
         <motion.h1

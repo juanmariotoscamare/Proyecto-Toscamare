@@ -19,7 +19,7 @@ const Hero = () => {
         data-aos="fade-up"
         data-aos-duration="1000"
       >
-        <h1 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-[0.2em] mb-6">
+        <h1 className="text-4xl md:text-7xl font-bold text-white uppercase tracking-wider md:tracking-[0.2em] mb-6">
           Bienvenidos a <br className="md:hidden" /><span className="text-blue-200">Toscamare</span>
         </h1>
 

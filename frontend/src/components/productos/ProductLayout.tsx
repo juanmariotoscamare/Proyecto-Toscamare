@@ -2,9 +2,10 @@ interface Props {
   intro: React.ReactNode;
   filters: React.ReactNode;
   content: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export const ProductLayout = ({ intro, filters, content }: Props) => {
+export const ProductLayout = ({ intro, filters, content, children }: Props) => {
   return (
     <div className="min-h-screen bg-[#F4F7F9] font-sans">
       {/* 🌊 SECCIÓN INTRO / HERO */}
@@ -21,7 +22,7 @@ export const ProductLayout = ({ intro, filters, content }: Props) => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-12">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* 🔍 ASIDE (FILTROS) */}
-          <aside className="w-full lg:w-[280px] flex-shrink-0">
+          <aside className="w-full lg:w-[350px] flex-shrink-0">
             <div className="lg:sticky lg:top-8 z-20">
               <div className="bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden">
                 <div className="bg-[#002B61] py-4 px-6 border-b-4 border-[#D4AF37]">
@@ -30,7 +31,9 @@ export const ProductLayout = ({ intro, filters, content }: Props) => {
                     Filtros
                   </h3>
                 </div>
-                <div className="p-5 bg-white">{filters}</div>
+                <div className="p-5 bg-white max-h-[calc(100vh-180px)] overflow-y-auto scrollbar-thin scrollbar-thumb-[#D4AF37] scrollbar-track-transparent">
+                  {filters}
+                </div>
               </div>
             </div>
           </aside>
@@ -47,6 +50,7 @@ export const ProductLayout = ({ intro, filters, content }: Props) => {
           ToscaMare © {new Date().getFullYear()} - Calidad de Origen
         </p>
       </footer>
+      {children}
     </div>
   );
 };

@@ -131,18 +131,19 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
   }
-}
-
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
 }
 
 [data-aos],
@@ -153,7 +154,16 @@ section {
   transform: translateZ(0);
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+/* Custom Scrollbar Utilities */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thumb-\[\#D4AF37\]::-webkit-scrollbar-thumb {
+    background-color: #D4AF37;
+    border-radius: 20px;
+  }
 }

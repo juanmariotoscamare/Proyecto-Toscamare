@@ -58,12 +58,12 @@ const NuestraEsencia = () => {
                 <img
                   src={imgAlmacen}
                   alt="Almacén Toscamare"
-                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 -rotate-2 hover:rotate-0 transition-transform duration-500"
+                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 rotate-0 md:-rotate-2 hover:rotate-0 transition-transform duration-500"
                 />
                 <img
                   src={imgCamion}
                   alt="Flota Toscamare"
-                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 rotate-2 hover:rotate-0 transition-transform duration-500 mt-4 md:mt-10"
+                  className="rounded-2xl shadow-xl w-full h-[240px] md:h-[480px] object-cover border-white border-4 md:border-8 rotate-0 md:rotate-2 hover:rotate-0 transition-transform duration-500 mt-4 md:mt-10"
                 />
               </div>
 

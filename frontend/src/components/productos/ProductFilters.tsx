@@ -6,11 +6,27 @@ interface Props {
 
 const categories = [
   { id: "todos", name: "Todos los productos" },
-  { id: "pescados", name: "Pescados Frescos" },
-  { id: "mariscos", name: "Mariscos Seleccionados" },
-  { id: "carnes", name: "Carnes Premium" },
-  { id: "conservas", name: "Conservas del Mar" },
-  { id: "vinos", name: "Bodega y Vinos" },
+  { id: "pescados", name: "Pescados" },
+  { id: "mariscos, moluscos y bivalvos", name: "Mariscos, moluscos y bivalvos" },
+  { id: "precocinados", name: "Precocinados" },
+  { id: "verduras", name: "Verduras" },
+  { id: "preparados con verduras", name: "Preparados con verduras" },
+  { id: "ahumados", name: "Ahumados" },
+  { id: "embutidos", name: "Embutidos" },
+  { id: "encurtidos", name: "Encurtidos" },
+  { id: "productos no perecederos", name: "Productos no perecederos" },
+  { id: "temáticos", name: "Temáticos" },
+  { id: "preparados y pizzas", name: "Preparados y pizzas" },
+  { id: "nata", name: "Nata" },
+  { id: "sin gluten", name: "Sin gluten" },
+  { id: "huevos", name: "Huevos" },
+  { id: "quesos", name: "Quesos" },
+  { id: "monodosis", name: "Monodosis" },
+  { id: "salsas", name: "Salsas" },
+  { id: "patatas", name: "Patatas" },
+  { id: "preparados postres", name: "Preparados postres" },
+  { id: "repostería", name: "Repostería" },
+  { id: "frutas", name: "Frutas" },
 ];
 
 export const ProductFilters = ({ activeCategory, setCategory }: Props) => {
@@ -20,22 +36,24 @@ export const ProductFilters = ({ activeCategory, setCategory }: Props) => {
         <button
           key={cat.id}
           onClick={() => setCategory(cat.id)}
-          className={`w-full group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 border border-transparent ${
+          className={`w-full group flex items-start justify-between px-4 py-3 rounded-xl transition-all duration-300 border border-transparent cursor-pointer ${
             activeCategory === cat.id
-              ? "bg-[#002B61]/5 text-[#002B61] font-bold shadow-sm border-blue-100/50" // Fondo azul muy sutil y elegante
-              : "text-gray-500 hover:bg-gray-50 hover:text-[#002B61]"
+              ? "bg-[#002B61]/5 text-[#002B61] font-extrabold shadow-sm border-blue-100/50"
+              : "text-gray-500 hover:bg-gray-50 hover:text-[#002B61] font-medium"
           }`}
         >
-          <span className="flex items-center gap-3">
-            {/* El punto dorado que indica selección */}
+          <span className="flex items-start gap-3 mt-1 text-left">
+            {/* El punto dorado */}
             <span
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 transition-all duration-300 group-hover:scale-125 ${
                 activeCategory === cat.id
-                  ? "bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.6)] scale-110" // Dorado brillante
+                  ? "bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.6)] scale-110"
                   : "bg-gray-300 group-hover:bg-[#D4AF37]"
               }`}
             />
-            {cat.name}
+            <span className="text-[13px] md:text-sm leading-tight uppercase tracking-wide">
+              {cat.name}
+            </span>
           </span>
 
           {/* Flecha deslizante */}
