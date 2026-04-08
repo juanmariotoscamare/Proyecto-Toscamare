@@ -2,7 +2,7 @@ import "./Header.css";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom"; // Cambiamos Link por NavLink
 import logo from "/logoToscamare/logo-simple-sin-fondo-ajustado.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface HeaderProps {
   links: {
@@ -27,11 +27,41 @@ function Header({ links }: HeaderProps) {
     } else {
       navigate("/");
     }
-  };
+  };  const [cartCount, setCartCount] = useState(0);
+  const [isBumping, setIsBumping] = useState(false);
 
+  // Efecto para cargar y escuchar cambios en el carrito
+  useEffect(() => {
+    const updateCount = () => {
+      const saved = localStorage.getItem("toscamare_pedido_pendiente");
+      if (saved) {
+        try {
+          const products = JSON.parse(saved);
+          if (products.length !== cartCount) {
+            setCartCount(products.length);
+            setIsBumping(true);
+            setTimeout(() => setIsBumping(false), 300);
+          }
+        } catch (e) {
+          setCartCount(0);
+        }
+      } else {
+        setCartCount(0);
+      }
+    };
 
+    // Carga inicial
+    updateCount();
 
+    // Escuchar eventos personalizados y de sistema
+    window.addEventListener("cart-updated", updateCount);
+    window.addEventListener("storage", updateCount);
 
+    return () => {
+      window.removeEventListener("cart-updated", updateCount);
+      window.removeEventListener("storage", updateCount);
+    };
+  }, [cartCount]);
   return (
     <header className="header-menu">
       <div
@@ -109,10 +139,19 @@ function Header({ links }: HeaderProps) {
       </div>
 
       <div className="header-shop">
-        <button className="shop-button">
-          PRÓXIMAMENTE
-          <FaShoppingCart />
-        </button>
+        <NavLink 
+          to={cartCount > 0 ? `${links.contacto}#pedido-resumen` : links.productos} 
+          className={`shop-button ${cartCount > 0 ? "has-items" : ""} ${isBumping ? "bump" : ""}`} 
+          onClick={closeMenu}
+        >
+          <div className="shop-icon-wrapper">
+            <FaShoppingCart className="shop-icon" />
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </div>
+          <span className="shop-text">
+            {cartCount > 0 ? "MI PEDIDO" : "HACER PEDIDO"}
+          </span>
+        </NavLink>
       </div>
     </header>
   );

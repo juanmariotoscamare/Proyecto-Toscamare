@@ -1,4 +1,4 @@
-import { Plus, Minus, Package } from "lucide-react";
+import { Plus, Package, Trash2, ChevronDown } from "lucide-react";
 
 interface Product {
   id: number;
@@ -14,10 +14,13 @@ interface Props {
   onSelect: (product: Product) => void;
   index?: number;
   quantity: number;
-  onUpdateCart: (productName: string, delta: number) => void;
+  unit: string;
+  onUpdateCart: (productName: string, quantity: number, unit: string) => void;
 }
 
-export const ProductCard = ({ product, onSelect, index = 0, quantity, onUpdateCart }: Props) => {
+const UNITS = ["Uds", "Kg", "gr"];
+
+export const ProductCard = ({ product, onSelect, index = 0, quantity, unit, onUpdateCart }: Props) => {
   return (
     <div 
       onClick={() => onSelect(product)}
@@ -31,7 +34,7 @@ export const ProductCard = ({ product, onSelect, index = 0, quantity, onUpdateCa
         <div className="absolute top-4 right-4 z-20 animate-in zoom-in duration-300">
           <div className="bg-[#D4AF37] text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 border border-white/20">
             <Package className="h-3 w-3" />
-            {quantity} EN PEDIDO
+            {quantity} {unit} EN PEDIDO
           </div>
         </div>
       )}
@@ -49,51 +52,6 @@ export const ProductCard = ({ product, onSelect, index = 0, quantity, onUpdateCa
           </span>
         </div>
         
-        {/* Capa de acción rápida al hover */}
-        <div className="absolute inset-0 bg-[#002B61]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap3">
-          {quantity === 0 ? (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onUpdateCart(product.name, 1);
-              }}
-              className="bg-white text-[#002B61] px-6 py-3 rounded-full font-black text-xs uppercase tracking-tighter shadow-2xl hover:bg-[#D4AF37] hover:text-white transition-all transform hover:scale-110 flex items-center gap-2 cursor-pointer active:scale-95"
-            >
-              <Plus className="h-4 w-4" /> Añadir al pedido
-            </button>
-          ) : (
-            <div className="flex items-center gap-2 bg-white p-1 rounded-full shadow-2xl transform scale-110 bg-white/95 backdrop-blur-sm"
-                 onClick={(e) => e.stopPropagation()}>
-              <button
-                onClick={() => onUpdateCart(product.name, -1)}
-                className="w-10 h-10 flex items-center justify-center rounded-full text-[#002B61] hover:bg-red-50 hover:text-red-500 transition-all hover:scale-110 cursor-pointer"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <input
-                type="number"
-                min="0"
-                max="999"
-                value={quantity}
-                onChange={(e) => {
-                  const val = Math.min(999, parseInt(e.target.value));
-                  if (!isNaN(val)) {
-                    onUpdateCart(product.name, val - quantity);
-                  }
-                }}
-                className="w-10 text-center font-black text-[#002B61] bg-transparent border-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-              <button
-                onClick={() => {
-                  if (quantity < 999) onUpdateCart(product.name, 1);
-                }}
-                className="w-10 h-10 flex items-center justify-center rounded-full text-[#002B61] hover:bg-green-50 hover:text-green-600 transition-all hover:scale-110 cursor-pointer"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </div>
-          )}
-        </div>
       </div>
 
       <div className="p-8 flex flex-col flex-1 justify-between bg-white relative">
@@ -101,41 +59,60 @@ export const ProductCard = ({ product, onSelect, index = 0, quantity, onUpdateCa
           {product.name}
         </h4>
         
-        {/* Botón persistente en móvil / visible siempre si ya hay unidades */}
-        {quantity > 0 && (
-          <div className="mt-2 flex items-center justify-between border-t border-gray-100 pt-4 animate-in slide-in-from-bottom-2">
-            <span className="text-[10px] font-bold text-[#002B61]/40 uppercase tracking-widest">En tu orden</span>
-            <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
-               <button 
-                 onClick={() => onUpdateCart(product.name, -1)} 
-                 className="text-[#002B61]/60 hover:text-red-500 transition-all hover:scale-125 cursor-pointer p-1"
-               >
-                 <Minus className="h-4 w-4"/>
-               </button>
-               <input
-                 type="number"
-                 min="0"
-                 max="999"
-                 value={quantity}
-                 onChange={(e) => {
-                   const val = Math.min(999, parseInt(e.target.value));
-                   if (!isNaN(val)) {
-                     onUpdateCart(product.name, val - quantity);
-                   }
-                 }}
-                 className="w-8 text-center font-black text-[#002B61] bg-transparent border-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-               />
-               <button 
-                 onClick={() => {
-                   if (quantity < 999) onUpdateCart(product.name, 1);
-                 }} 
-                 className="text-[#002B61]/60 hover:text-green-600 transition-all hover:scale-125 cursor-pointer p-1"
-               >
-                 <Plus className="h-4 w-4"/>
-               </button>
+        <div className="mt-auto">
+          {quantity > 0 ? (
+            <div className="border-t border-gray-100 pt-5 animate-in slide-in-from-bottom-2">
+              <div className="flex flex-col gap-3" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1">
+                    <input 
+                      type="number" 
+                      value={quantity}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        if (!isNaN(val)) onUpdateCart(product.name, val, unit);
+                      }}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold text-[#002B61] focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent outline-none transition-all"
+                      placeholder="Cantidad"
+                      min="0"
+                    />
+                  </div>
+                  <div className="relative flex-1">
+                    <select
+                      value={unit}
+                      onChange={(e) => onUpdateCart(product.name, quantity, e.target.value)}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold text-[#002B61] appearance-none cursor-pointer focus:ring-2 focus:ring-[#D4AF37] outline-none transition-all"
+                    >
+                      {UNITS.map(u => (
+                        <option key={u} value={u}>{u}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400 pointer-events-none" />
+                  </div>
+                  <button 
+                    onClick={() => onUpdateCart(product.name, 0, unit)}
+                    className="p-2.5 bg-red-50 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all cursor-pointer group/trash"
+                    title="Eliminar"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="border-t border-gray-100 pt-5 mt-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onUpdateCart(product.name, 1, "Uds");
+                }}
+                className="w-full py-3.5 bg-[#011468] text-white rounded-xl font-black text-[10px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 hover:bg-[#D4AF37] active:scale-95 transition-all shadow-lg shadow-blue-900/10 cursor-pointer"
+              >
+                <Plus className="h-4 w-4" /> Añadir al pedido
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

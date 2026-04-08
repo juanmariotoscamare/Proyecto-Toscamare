@@ -11,8 +11,8 @@ interface Product {
 
 interface Props {
   products: Product[];
-  selectedProducts: {name: string, quantity: number}[];
-  onUpdateCart: (productName: string, delta: number) => void;
+  selectedProducts: {name: string, quantity: number, unit: string}[];
+  onUpdateCart: (productName: string, quantity: number, unit: string) => void;
   onSelect: (product: Product) => void;
 }
 
@@ -57,6 +57,7 @@ export const ProductGrid = ({ products, selectedProducts, onUpdateCart, onSelect
             onSelect={onSelect} 
             index={index}
             quantity={cartItem ? cartItem.quantity : 0}
+            unit={cartItem ? cartItem.unit : "Uds"}
             onUpdateCart={onUpdateCart}
           />
         );

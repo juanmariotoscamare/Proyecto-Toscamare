@@ -218,7 +218,7 @@ export default function ProductsPage() {
   );
 
   // --- LÓGICA DE CARRITO / LOCALSTORAGE ---
-  const [selectedProducts, setSelectedProducts] = useState<{name: string, quantity: number}[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<{name: string, quantity: number, unit: string}[]>([]);
 
   // Cargar carrito al iniciar
   useEffect(() => {
@@ -239,21 +239,25 @@ export default function ProductsPage() {
     } else {
       localStorage.removeItem("toscamare_pedido_pendiente");
     }
+    // Notificar al resto de la app (Header)
+    window.dispatchEvent(new Event("cart-updated"));
   }, [selectedProducts]);
 
-  const handleUpdateCart = (productName: string, delta: number) => {
+  const handleUpdateCart = (productName: string, quantity: number, unit: string = "Uds") => {
     setSelectedProducts(prev => {
-      const existing = prev.find(p => p.name === productName);
-      if (existing) {
-        const newQty = existing.quantity + delta;
-        if (newQty <= 0) {
-          return prev.filter(p => p.name !== productName);
-        }
-        return prev.map(p => p.name === productName ? { ...p, quantity: newQty } : p);
-      } else if (delta > 0) {
-        return [...prev, { name: productName, quantity: delta }];
+      const existingIndex = prev.findIndex(p => p.name === productName);
+      
+      if (quantity <= 0) {
+        return prev.filter(p => p.name !== productName);
       }
-      return prev;
+
+      if (existingIndex >= 0) {
+        const newProducts = [...prev];
+        newProducts[existingIndex] = { name: productName, quantity, unit };
+        return newProducts;
+      } else {
+        return [...prev, { name: productName, quantity, unit }];
+      }
     });
   };
 
@@ -300,33 +304,31 @@ export default function ProductsPage() {
               </p>
             </div>
 
-          <div data-aos="fade-up" data-aos-delay="300">
             <ProductSearch onSearch={handleSearch} />
           </div>
+        
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 animate-pulse">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-gray-200 rounded-2xl h-96"></div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <ProductGrid 
+                products={currentItems} 
+                onSelect={setSelectedProduct} 
+                selectedProducts={selectedProducts}
+                onUpdateCart={handleUpdateCart}
+              />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </>
+          )}
         </div>
-
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 animate-pulse">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-gray-200 rounded-2xl h-96"></div>
-            ))}
-          </div>
-        ) : (
-          <>
-            <ProductGrid 
-              products={currentItems} 
-              onSelect={setSelectedProduct} 
-              selectedProducts={selectedProducts}
-              onUpdateCart={handleUpdateCart}
-            />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </>
-        )}
-      </div>
       }
     >
       <ScrollToTopButton />

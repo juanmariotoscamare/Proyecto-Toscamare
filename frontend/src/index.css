@@ -144,6 +144,9 @@ html {
     @apply bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
   }
+  button {
+    cursor: pointer;
+  }
 }
 
 [data-aos],
@@ -155,7 +158,22 @@ section {
 }
 
 /* Custom Scrollbar Utilities */
+/* Animations */
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 @layer utilities {
+  .scale-up-center {
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  }
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
   }
