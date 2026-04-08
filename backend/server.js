@@ -61,6 +61,8 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({ success: false, message: validation.error });
     }
 
+    const formType = req.body.formType || 'contacto';
+    const selectedProducts = req.body.selectedProducts || [];
     const fullName = sanitize(req.body.fullName);
     const companyName = sanitize(req.body.companyName);
     const email = sanitize(req.body.email);
@@ -75,9 +77,18 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    const info = await sendContactEmail({ fullName, companyName, email, phone, subject, message });
+    const info = await sendContactEmail({ 
+      formType, 
+      fullName, 
+      companyName, 
+      email, 
+      phone, 
+      subject, 
+      message,
+      selectedProducts 
+    });
 
-    console.log(`[OK] Email enviado de: ${email} | MessageId: ${info.messageId}`);
+    console.log(`[OK] Email (${formType}) enviado de: ${email} | MessageId: ${info.messageId}`);
 
     res.json({ success: true, message: 'Mensaje enviado correctamente' });
   } catch (error) {
@@ -93,7 +104,7 @@ app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'Contact Form API - Toscamare',
-    destination: process.env.EMAIL,
+    departments: ['pedidos', 'contacto']
   });
 });
 
@@ -137,7 +148,7 @@ app.listen(PORT, () => {
   =============================================
 
   Servidor:      http://localhost:${PORT}
-  Email destino: ${process.env.EMAIL || 'NO CONFIGURADO'}
+  Departamentos: Pedidos y Administración/Contacto
 
   Endpoints:
     GET  /              - Pagina de inicio

@@ -1,9 +1,12 @@
+import React, { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import ContactForm from "@/components/contact/contact-form"
 import ContactInfo from "@/components/contact/contact-info"
 import ContactFaq from "@/components/contact/contact-faq"
 
 export default function ContactoPage() {
+  const [formType, setFormType] = useState<"pedidos" | "contacto">("pedidos");
+
   return (
     <main className="min-h-screen bg-background pt-16 md:pt-20">
       {/* Hero Section */}
@@ -34,7 +37,7 @@ export default function ContactoPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ContactForm />
+                  <ContactForm formType={formType} setFormType={setFormType} />
                 </CardContent>
               </Card>
             </div>
@@ -49,7 +52,7 @@ export default function ContactoPage() {
                   Puedes contactar con nosotros directamente a través de estos canales.
                 </p>
               </div>
-              <ContactInfo />
+              <ContactInfo formType={formType} />
             </div>
           </div>
         </div>

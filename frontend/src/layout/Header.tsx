@@ -139,7 +139,11 @@ function Header({ links }: HeaderProps) {
       </div>
 
       <div className="header-shop">
-        <NavLink to={`${links.contacto}#pedido-resumen`} className={`shop-button ${cartCount > 0 ? "has-items" : ""} ${isBumping ? "bump" : ""}`} onClick={closeMenu}>
+        <NavLink 
+          to={cartCount > 0 ? `${links.contacto}#pedido-resumen` : links.productos} 
+          className={`shop-button ${cartCount > 0 ? "has-items" : ""} ${isBumping ? "bump" : ""}`} 
+          onClick={closeMenu}
+        >
           <div className="shop-icon-wrapper">
             <FaShoppingCart className="shop-icon" />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}

@@ -2,44 +2,60 @@ import nodemailer from 'nodemailer';
 
 /**
  * Envía el email de contacto a la empresa.
- * @param {{ fullName: string, companyName?: string, email: string, phone?: string, subject: string, message: string }} data
+ * @param {{ formType: string, fullName: string, companyName?: string, email: string, phone?: string, subject: string, message: string, selectedProducts: Array }} data
  */
-export async function sendContactEmail({ fullName, companyName, email, phone, subject, message }) {
+export async function sendContactEmail({ formType, fullName, companyName, email, phone, subject, message, selectedProducts }) {
+  // Seleccionamos credenciales según el tipo de formulario
+  const isPedido = formType === 'pedidos';
+  const senderEmail = isPedido ? process.env.EMAIL_PEDIDOS : process.env.EMAIL_CONTACTO;
+  const senderPass = isPedido ? process.env.PASSWORD_PEDIDOS : process.env.PASSWORD_CONTACTO;
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.ionos.es',
     port: 587,
     secure: false,
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
+      user: senderEmail,
+      pass: senderPass,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
 
+  const mailSubject = isPedido ? `NUEVO PEDIDO: ${fullName}` : `Nuevo mensaje de contacto: ${subject}`;
+
   const info = await transporter.sendMail({
-    from: `"Toscamare" <${process.env.EMAIL}>`,
-    to: process.env.EMAIL,
+    from: `"Toscamare" <${senderEmail}>`,
+    to: senderEmail,
     replyTo: email,
-    subject: `Nuevo mensaje desde la web Toscamare: ${subject}`,
-    text: buildPlainText({ fullName, companyName, email, phone, subject, message }),
-    html: buildHtml({ fullName, companyName, email, phone, subject, message }),
+    subject: mailSubject,
+    text: buildPlainText({ formType, fullName, companyName, email, phone, subject, message, selectedProducts }),
+    html: buildHtml({ formType, fullName, companyName, email, phone, subject, message, selectedProducts }),
   });
 
   return info;
 }
 
-function buildPlainText({ fullName, companyName, email, phone, subject, message }) {
+function buildPlainText({ formType, fullName, companyName, email, phone, subject, message, selectedProducts }) {
+  const isPedido = formType === 'pedidos';
+  let productsLine = '';
+  
+  if (isPedido && selectedProducts && selectedProducts.length > 0) {
+    productsLine = '\nPRODUCTOS SOLICITADOS:\n' + 
+      selectedProducts.map(p => `- ${p.quantity} ${p.unit || 'Uds'} de ${p.name}`).join('\n') + 
+      '\n--------------------------------------\n';
+  }
+
   return `
-NUEVO MENSAJE DE CONTACTO - TOSCAMARE
+${isPedido ? 'NUEVO PEDIDO RECIBIDO' : 'NUEVO MENSAJE DE CONTACTO'} - TOSCAMARE
 --------------------------------------
 
 Nombre: ${fullName}${companyName ? `\nEmpresa: ${companyName}` : ''}
 Email: ${email}${phone ? `\nTelefono: ${phone}` : ''}
-Asunto: ${subject}
-
-Mensaje:
+${isPedido ? '' : `Asunto: ${subject}`}
+${productsLine}
+${isPedido ? 'Comentarios:' : 'Mensaje:'}
 ${message}
 
 --------------------------------------
@@ -47,7 +63,30 @@ Para responder, utiliza: ${email}
   `.trim();
 }
 
-function buildHtml({ fullName, companyName, email, phone, subject, message }) {
+function buildHtml({ formType, fullName, companyName, email, phone, subject, message, selectedProducts }) {
+  const isPedido = formType === 'pedidos';
+  const accentColor = '#005bb7';
+  const title = isPedido ? 'Nuevo Pedido' : 'Consulta de Contacto';
+
+  let productsHtml = '';
+  if (isPedido && selectedProducts && selectedProducts.length > 0) {
+    productsHtml = `
+      <div style="margin-bottom:20px; padding:20px; background:#f8fbff; border-radius:12px; border:1px solid #e1e8f0;">
+        <div style="font-weight:700; color:${accentColor}; font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; border-bottom:1px solid #e1e8f0; padding-bottom:8px;">
+          Contenido del Pedido
+        </div>
+        <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
+          ${selectedProducts.map(p => `
+            <tr>
+              <td style="padding:10px 0; border-bottom:1px solid #f1f5f9; color:${accentColor}; font-weight:700; width:100px;">${p.quantity} ${p.unit || 'Uds'}</td>
+              <td style="padding:10px 0; border-bottom:1px solid #f1f5f9; color:#334155;">${p.name}</td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  }
+
   return `
 <!DOCTYPE html>
 <html lang="es">
@@ -55,60 +94,63 @@ function buildHtml({ fullName, companyName, email, phone, subject, message }) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; padding:0; background-color:#f5f5f5; font-family:Arial, Helvetica, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f5f5; padding:20px 0;">
+<body style="margin:0; padding:0; background-color:#fafafa; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafafa; padding:30px 0;">
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.05);">
 
           <!-- Header -->
           <tr>
-            <td style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding:40px 30px; text-align:center;">
-              <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:600;">Nuevo Mensaje de Contacto</h1>
+            <td style="background:linear-gradient(135deg, ${accentColor} 0%, #7fbaf5 100%); padding:50px 30px; text-align:center;">
+              <h1 style="margin:0; color:#ffffff; font-size:26px; font-weight:800; letter-spacing:0.5px;">${title}</h1>
+              <p style="margin:10px 0 0; color:rgba(255,255,255,0.9); font-size:14px;">Notificación oficial - Toscamare</p>
             </td>
           </tr>
 
           <!-- Body -->
           <tr>
-            <td style="padding:30px;">
+            <td style="padding:40px 30px;">
 
-              <div style="margin-bottom:20px; padding:16px; background:#f9fafb; border-radius:8px; border-left:4px solid #667eea;">
-                <div style="font-weight:600; color:#667eea; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Nombre Completo</div>
-                <div style="color:#1f2937; font-size:16px;">${fullName}</div>
+              <div style="margin-bottom:20px; padding:18px; background:#fcfcfc; border-radius:12px; border:1px solid #f1f5f9;">
+                <div style="font-weight:700; color:${accentColor}; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Información del Cliente</div>
+                <div style="color:#1e293b; font-size:16px; font-weight:500;">
+                  ${fullName} ${companyName ? `<span style="color:#64748b; font-weight:400; font-size:14px;">— ${companyName}</span>` : ''}
+                </div>
               </div>
 
-              ${companyName ? `
-              <div style="margin-bottom:20px; padding:16px; background:#f9fafb; border-radius:8px; border-left:4px solid #667eea;">
-                <div style="font-weight:600; color:#667eea; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Entidad / Empresa</div>
-                <div style="color:#1f2937; font-size:16px;">${companyName}</div>
+              <div style="display:flex; gap:15px; margin-bottom:20px;">
+                <div style="flex:1; padding:15px; background:#fcfcfc; border-radius:12px; border:1px solid #f1f5f9;">
+                  <div style="font-weight:700; color:${accentColor}; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Email</div>
+                  <div style="color:#1e293b; font-size:14px;"><a href="mailto:${email}" style="color:${accentColor}; text-decoration:none;">${email}</a></div>
+                </div>
+                ${phone ? `
+                <div style="flex:1; padding:15px; background:#fcfcfc; border-radius:12px; border:1px solid #f1f5f9;">
+                  <div style="font-weight:700; color:${accentColor}; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Teléfono</div>
+                  <div style="color:#1e293b; font-size:14px;">${phone}</div>
+                </div>
+                ` : ''}
+              </div>
+
+              ${!isPedido ? `
+              <div style="margin-bottom:20px; padding:18px; background:#fcfcfc; border-radius:12px; border:1px solid #f1f5f9;">
+                <div style="font-weight:700; color:${accentColor}; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Asunto</div>
+                <div style="color:#1e293b; font-size:15px;">${subject}</div>
               </div>
               ` : ''}
 
-              <div style="margin-bottom:20px; padding:16px; background:#f9fafb; border-radius:8px; border-left:4px solid #667eea;">
-                <div style="font-weight:600; color:#667eea; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Email de Contacto</div>
-                <div style="color:#1f2937; font-size:16px;"><a href="mailto:${email}" style="color:#667eea; text-decoration:none;">${email}</a></div>
+              ${productsHtml}
+
+              <div style="margin-bottom:30px; padding:20px; background:#fcfcfc; border-radius:12px; border:1px solid #f1f5f9;">
+                <div style="font-weight:700; color:${accentColor}; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">
+                  ${isPedido ? 'Observaciones del Pedido' : 'Contenido del Mensaje'}
+                </div>
+                <div style="color:#334155; font-size:15px; white-space:pre-wrap; line-height:1.6;">${message || 'No se han incluido comentarios adicionales.'}</div>
               </div>
 
-              ${phone ? `
-              <div style="margin-bottom:20px; padding:16px; background:#f9fafb; border-radius:8px; border-left:4px solid #667eea;">
-                <div style="font-weight:600; color:#667eea; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Telefono</div>
-                <div style="color:#1f2937; font-size:16px;">${phone}</div>
-              </div>
-              ` : ''}
-
-              <div style="margin-bottom:20px; padding:16px; background:#f9fafb; border-radius:8px; border-left:4px solid #667eea;">
-                <div style="font-weight:600; color:#667eea; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Asunto</div>
-                <div style="color:#1f2937; font-size:16px;">${subject}</div>
-              </div>
-
-              <div style="margin-bottom:20px; padding:20px; background:#f0f4ff; border-radius:8px; border-left:4px solid #764ba2;">
-                <div style="font-weight:600; color:#764ba2; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Mensaje</div>
-                <div style="color:#1f2937; font-size:16px; white-space:pre-wrap;">${message}</div>
-              </div>
-
-              <div style="text-align:center; margin:25px 0;">
-                <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)}" style="display:inline-block; padding:12px 30px; background:#667eea; color:#ffffff; text-decoration:none; border-radius:6px; font-weight:500; font-size:14px;">
-                  Responder a ${fullName}
+              <div style="text-align:center; margin:20px 0;">
+                <a href="mailto:${email}?subject=Re: ${encodeURIComponent(isPedido ? 'Confirmación de tu pedido Toscamare' : 'Respuesta a tu consulta Toscamare')}" style="display:inline-block; padding:16px 45px; background:${accentColor}; color:#ffffff; text-decoration:none; border-radius:50px; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:1px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+                  Responder directamente
                 </a>
               </div>
 
@@ -117,9 +159,9 @@ function buildHtml({ fullName, companyName, email, phone, subject, message }) {
 
           <!-- Footer -->
           <tr>
-            <td style="text-align:center; padding:20px; color:#6b7280; font-size:12px; border-top:1px solid #e5e7eb;">
-              <p style="margin:0 0 5px 0;">Este mensaje fue enviado desde el formulario de contacto de Toscamare</p>
-              <p style="margin:0;">Para responder, haz clic en el boton de arriba o responde directamente a este email</p>
+            <td style="text-align:center; padding:20px; color:#9ca3af; font-size:11px; border-top:1px solid #f3f4f6; background-color: #fafbfc;">
+              <p style="margin:0 0 5px 0;">TOSCAMARE - Gestión Automática de Formularios Web</p>
+              <p style="margin:0;">Este correo es una notificación automática. No lo compartas con personas ajenas a la empresa.</p>
             </td>
           </tr>
 

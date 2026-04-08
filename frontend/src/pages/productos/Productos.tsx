@@ -218,7 +218,7 @@ export default function ProductsPage() {
   );
 
   // --- LÓGICA DE CARRITO / LOCALSTORAGE ---
-  const [selectedProducts, setSelectedProducts] = useState<{name: string, quantity: number}[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<{name: string, quantity: number, unit: string}[]>([]);
 
   // Cargar carrito al iniciar
   useEffect(() => {
@@ -243,19 +243,21 @@ export default function ProductsPage() {
     window.dispatchEvent(new Event("cart-updated"));
   }, [selectedProducts]);
 
-  const handleUpdateCart = (productName: string, delta: number) => {
+  const handleUpdateCart = (productName: string, quantity: number, unit: string = "Uds") => {
     setSelectedProducts(prev => {
-      const existing = prev.find(p => p.name === productName);
-      if (existing) {
-        const newQty = existing.quantity + delta;
-        if (newQty <= 0) {
-          return prev.filter(p => p.name !== productName);
-        }
-        return prev.map(p => p.name === productName ? { ...p, quantity: newQty } : p);
-      } else if (delta > 0) {
-        return [...prev, { name: productName, quantity: delta }];
+      const existingIndex = prev.findIndex(p => p.name === productName);
+      
+      if (quantity <= 0) {
+        return prev.filter(p => p.name !== productName);
       }
-      return prev;
+
+      if (existingIndex >= 0) {
+        const newProducts = [...prev];
+        newProducts[existingIndex] = { name: productName, quantity, unit };
+        return newProducts;
+      } else {
+        return [...prev, { name: productName, quantity, unit }];
+      }
     });
   };
 

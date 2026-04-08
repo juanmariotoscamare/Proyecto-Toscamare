@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { CheckCircle, Search, X, Package, AlertTriangle, Trash2 } from "lucide-react";
+import { CheckCircle, Search, Package, AlertTriangle, Trash2 } from "lucide-react";
 import Papa from "papaparse";
 
 interface Product {
@@ -18,12 +18,19 @@ interface Product {
 interface SelectedProduct {
   name: string;
   quantity: number;
+  unit: string;
 }
+
+const UNITS = ["Uds", "Kg", "gr"];
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
-export default function ContactForm() {
-  const [formType, setFormType] = useState<"pedidos" | "contacto">("pedidos");
+interface Props {
+  formType: "pedidos" | "contacto";
+  setFormType: (type: "pedidos" | "contacto") => void;
+}
+
+export default function ContactForm({ formType, setFormType }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -103,16 +110,15 @@ export default function ContactForm() {
     .slice(0, 8);
 
   const handleSelectProduct = (productName: string) => {
-    setSelectedProducts([...selectedProducts, { name: productName, quantity: 1 }]);
+    setSelectedProducts([...selectedProducts, { name: productName, quantity: 1, unit: "Uds" }]);
     setSearchQuery("");
     setShowResults(false);
   };
 
-  const handleQuantityChange = (productName: string, delta: number) => {
+  const handleUpdateProduct = (productName: string, quantity: number, unit: string) => {
     setSelectedProducts(prev => prev.map(p => {
       if (p.name === productName) {
-        const newQty = Math.max(1, p.quantity + delta);
-        return { ...p, quantity: newQty };
+        return { ...p, quantity, unit };
       }
       return p;
     }));
@@ -153,7 +159,7 @@ export default function ContactForm() {
     }
 
     const productSummary = selectedProducts
-      .map(p => `${p.quantity}x ${p.name}`)
+      .map(p => `${p.quantity} ${p.unit} de ${p.name}`)
       .join(", ");
 
     const data = {
@@ -403,45 +409,34 @@ export default function ContactForm() {
                       </span>
                     </div>
                     
-                    <div className="flex items-center gap-4 bg-muted/50 p-1 rounded-lg">
-                      <div className="flex items-center gap-1">
-                        <button
-                          type="button"
-                          onClick={() => handleQuantityChange(p.name, -1)}
-                          className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-border hover:bg-red-50 hover:text-red-600 transition-all hover:scale-110 cursor-pointer shadow-sm"
-                        >
-                          -
-                        </button>
+                    <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-xl">
+                      <div className="flex items-center gap-2">
                         <input
                           type="number"
-                          min="0"
-                          max="999"
                           value={p.quantity}
                           onChange={(e) => {
-                            const val = Math.min(999, parseInt(e.target.value));
-                            if (!isNaN(val)) {
-                              handleQuantityChange(p.name, val - p.quantity);
-                            }
+                            const val = parseFloat(e.target.value);
+                            if (!isNaN(val)) handleUpdateProduct(p.name, val, p.unit);
                           }}
-                          className="w-10 text-center font-black text-[#011468] bg-transparent border-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          className="w-16 h-10 px-2 rounded-lg bg-white border border-border font-bold text-[#011468] text-center focus:ring-2 focus:ring-[#D4AF37] outline-none"
                         />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (p.quantity < 999) handleQuantityChange(p.name, 1);
-                          }}
-                          className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-border hover:bg-blue-50 hover:text-blue-600 transition-all hover:scale-110 cursor-pointer shadow-sm"
+                        <select
+                          value={p.unit}
+                          onChange={(e) => handleUpdateProduct(p.name, p.quantity, e.target.value)}
+                          className="h-10 px-2 rounded-lg bg-white border border-border font-bold text-[#011468] text-xs cursor-pointer focus:ring-2 focus:ring-[#D4AF37] outline-none"
                         >
-                          +
-                        </button>
+                          {UNITS.map(u => (
+                            <option key={u} value={u}>{u}</option>
+                          ))}
+                        </select>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleRemoveProduct(p.name)}
-                        className="p-1.5 hover:text-red-500 transition-colors cursor-pointer"
+                        className="p-2 text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
                         title="Eliminar producto"
                       >
-                        <X className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
                   </div>

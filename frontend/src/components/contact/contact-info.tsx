@@ -28,7 +28,15 @@ const contactInfo = [
   },
 ];
 
-export default function ContactInfo() {
+interface Props {
+  formType: "pedidos" | "contacto";
+}
+
+export default function ContactInfo({ formType }: Props) {
+  const currentEmail = formType === "pedidos" 
+    ? "pedidos@cialtoscamare.es" 
+    : "administracion@cialtoscamare.es";
+
   return (
     <div className="space-y-6">
       {/* Email - ancho completo */}
@@ -38,9 +46,11 @@ export default function ContactInfo() {
             <Mail className="h-5 w-5 text-primary" />
           </div>
           <div className="space-y-1 min-w-0 flex-1">
-            <p className="text-sm font-medium text-muted-foreground">Email</p>
+            <p className="text-sm font-medium text-muted-foreground">Email de {formType === "pedidos" ? "pedidos" : "administración"}</p>
             <p className="font-semibold text-sm text-foreground">
-              administracion@cialtoscamare.es
+              <a href={`mailto:${currentEmail}`} className="hover:text-primary transition-colors">
+                {currentEmail}
+              </a>
             </p>
           </div>
         </CardContent>
