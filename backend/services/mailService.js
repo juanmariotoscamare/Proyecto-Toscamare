@@ -31,21 +31,22 @@ export async function sendContactEmail({
   }
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.ionos.es",
-    port: 587,
-    secure: false, // true para 465, false para 587
+    host: "smtp.ionos.com",
+    port: 465,
+    secure: true,
     auth: {
       user: senderEmail,
       pass: senderPass,
     },
     tls: {
       rejectUnauthorized: false,
-      minVersion: "TLSv1.2"
     },
-    family: 4, // FORZAR IPv4 - Esto suele arreglar los Timeouts en Render
-    connectionTimeout: 15000,
-    greetingTimeout: 15000,
-    socketTimeout: 20000,
+    family: 4,
+    debug: true,
+    logger: true,
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
+    socketTimeout: 25000,
   });
 
   // Verificar conexión antes de enviar
