@@ -15,7 +15,7 @@ import {
   Send,
 } from "lucide-react";
 
-const API_URL = "https://proyecto-toscamare.onrender.com";
+const API_URL = "http://localhost:3001";
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);

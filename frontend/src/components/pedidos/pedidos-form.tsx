@@ -40,7 +40,7 @@ interface SelectedProduct {
 
 const UNITS = ["Uds", "Kg", "gr"];
 
-const API_URL = "https://proyecto-toscamare.onrender.com";
+const API_URL = "http://localhost:3001";
 
 export default function PedidosForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
