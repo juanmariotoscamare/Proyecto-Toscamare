@@ -16,42 +16,44 @@ export async function sendContactEmail({
   deliveryMethod,
   selectedStore,
 }) {
-  // Destino final (Ionos)
+  // Seleccionamos credenciales según el tipo de formulario
   const isPedido = formType === "pedidos";
-  const destinationEmail = isPedido
+  const senderEmail = isPedido
     ? process.env.EMAIL_PEDIDOS
     : process.env.EMAIL_CONTACTO;
+  const senderPass = isPedido
+    ? process.env.PASSWORD_PEDIDOS
+    : process.env.PASSWORD_CONTACTO;
 
-  // Cartero (Gmail)
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_PASS;
-
-  if (!gmailUser || !gmailPass) {
-    console.error(`[CRITICAL] Faltan variables GMAIL_USER o GMAIL_PASS`);
-    throw new Error("Falta configuración de Gmail en Render.");
+  if (!senderEmail || !senderPass) {
+    console.error(`[CRITICAL] Faltan variables de entorno para ${formType}`);
+    throw new Error("Configuración de correo incompleta en el servidor.");
   }
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    host: "smtp.ionos.es",
+    port: 587,
+    secure: false,
     auth: {
-      user: gmailUser,
-      pass: gmailPass,
+      user: senderEmail,
+      pass: senderPass,
     },
-    family: 4, // Forzar IPv4 para Gmail también
-    connectionTimeout: 10000, // 10 segundos
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
 
-  console.log(`[MAIL] Preparando envío: ${gmailUser} -> ${destinationEmail}`);
+  console.log(
+    `[MAIL] Attempting to send ${formType} email from ${senderEmail} to ${senderEmail}...`
+  );
   
   const mailSubject = isPedido
     ? `NUEVO PEDIDO: ${fullName}`
     : `Nuevo mensaje de contacto: ${subject}`;
 
   const info = await transporter.sendMail({
-    from: `"Web Toscamare" <${gmailUser}>`,
-    to: destinationEmail,
+    from: `"Toscamare" <${senderEmail}>`,
+    to: senderEmail,
     replyTo: email,
     subject: mailSubject,
     text: buildPlainText({
