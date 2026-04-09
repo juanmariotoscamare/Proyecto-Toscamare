@@ -41,33 +41,16 @@ export async function sendContactEmail({
     tls: {
       rejectUnauthorized: false,
     },
-    family: 4,
-    debug: true,
-    logger: true,
-    connectionTimeout: 20000,
-    greetingTimeout: 20000,
-    socketTimeout: 25000,
+    connectionTimeout: 10000,
   });
 
-  // Verificar conexión antes de enviar
-  try {
-    console.log(`[SMTP] Verificando conexión para ${senderEmail}...`);
-    await transporter.verify();
-    console.log(`[SMTP] Conexión verificada con éxito.`);
-  } catch (verifyError) {
-    console.error(`[SMTP ERROR] Fallo al conectar con Ionos:`, verifyError);
-    throw new Error(`Error de conexión con el servidor de correo: ${verifyError.message}`);
-  }
-
-  console.log(
-    `[MAIL] Attempting to send ${formType} email from ${senderEmail} to ${senderEmail}...`,
-  );
   const mailSubject = isPedido
     ? `NUEVO PEDIDO: ${fullName}`
     : `Nuevo mensaje de contacto: ${subject}`;
 
-  // Forzar un timeout manual para que no se cuelgue infinito
-  const sendPromise = transporter.sendMail({
+  console.log(`[MAIL] Intentando envío directo...`);
+  
+  return transporter.sendMail({
     from: `"Toscamare" <${senderEmail}>`,
     to: senderEmail,
     replyTo: email,
@@ -97,16 +80,6 @@ export async function sendContactEmail({
       selectedStore,
     }),
   });
-
-  const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Timeout: El servidor de correo (Ionos) no responde después de 25 segundos.')), 25000)
-  );
-
-  console.log(`[MAIL] Enviando mensaje...`);
-  const info = await Promise.race([sendPromise, timeoutPromise]);
-
-  console.log(`[MAIL SUCCESS] Email enviado! MessageId: ${info.messageId}`);
-  return info;
 }
 
 function buildPlainText({
