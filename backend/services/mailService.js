@@ -10,6 +10,11 @@ export async function sendContactEmail({ formType, fullName, companyName, email,
   const senderEmail = isPedido ? process.env.EMAIL_PEDIDOS : process.env.EMAIL_CONTACTO;
   const senderPass = isPedido ? process.env.PASSWORD_PEDIDOS : process.env.PASSWORD_CONTACTO;
 
+  if (!senderEmail || !senderPass) {
+    console.error(`[CRITICAL] Faltan variables de entorno para ${formType}`);
+    throw new Error('Configuración de correo incompleta en el servidor.');
+  }
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.ionos.es',
     port: 587,
@@ -21,6 +26,7 @@ export async function sendContactEmail({ formType, fullName, companyName, email,
     tls: {
       rejectUnauthorized: false,
     },
+    connectionTimeout: 15000,
   });
 
   console.log(`[MAIL] Attempting to send ${formType} email from ${senderEmail} to ${senderEmail}...`);
