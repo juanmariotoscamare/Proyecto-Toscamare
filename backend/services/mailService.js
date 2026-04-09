@@ -32,17 +32,20 @@ export async function sendContactEmail({
 
   const transporter = nodemailer.createTransport({
     host: "smtp.ionos.es",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false, // true para 465, false para 587
     auth: {
       user: senderEmail,
       pass: senderPass,
     },
     tls: {
       rejectUnauthorized: false,
+      minVersion: "TLSv1.2"
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
+    family: 4, // FORZAR IPv4 - Esto suele arreglar los Timeouts en Render
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 20000,
   });
 
   // Verificar conexión antes de enviar
@@ -62,7 +65,8 @@ export async function sendContactEmail({
     ? `NUEVO PEDIDO: ${fullName}`
     : `Nuevo mensaje de contacto: ${subject}`;
 
-  const info = await transporter.sendMail({
+  // Forzar un timeout manual para que no se cuelgue infinito
+  const sendPromise = transporter.sendMail({
     from: `"Toscamare" <${senderEmail}>`,
     to: senderEmail,
     replyTo: email,
@@ -93,7 +97,14 @@ export async function sendContactEmail({
     }),
   });
 
-  console.log(`[MAIL SUCCESS] Email sent! MessageId: ${info.messageId}`);
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Timeout: El servidor de correo (Ionos) no responde después de 25 segundos.')), 25000)
+  );
+
+  console.log(`[MAIL] Enviando mensaje...`);
+  const info = await Promise.race([sendPromise, timeoutPromise]);
+
+  console.log(`[MAIL SUCCESS] Email enviado! MessageId: ${info.messageId}`);
   return info;
 }
 
