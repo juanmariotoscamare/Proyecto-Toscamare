@@ -1,4 +1,10 @@
 import "../../components/cookiesComp/EstilosCookies.css";
+import logo_google from "../../assets/imagenesBrowsers/logo_chrome.svg";
+import logo_firefox from "../../assets/imagenesBrowsers/logo_firefox.svg";
+import logo_opera from "../../assets/imagenesBrowsers/logo_opera.svg";
+import logo_safari from "../../assets/imagenesBrowsers/logo_safari.png";
+import logo_edge from "../../assets/imagenesBrowsers/logo_edge.svg";
+
 const ManejoCookies = () => {
   return (
     <div className="cookies-block">
@@ -20,7 +26,7 @@ const ManejoCookies = () => {
             style={{ display: "flex", gap: "8px" }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"
+              src={logo_firefox}
               alt="Firefox"
               width={"24"}
             />{" "}
@@ -35,7 +41,7 @@ const ManejoCookies = () => {
             style={{ display: "flex", gap: "8px" }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg"
+              src={logo_google}
               alt="Chrome"
               width={"24"}
             />{" "}
@@ -50,7 +56,7 @@ const ManejoCookies = () => {
             style={{ display: "flex", gap: "8px" }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"
+              src={logo_edge}
               alt="Microsoft Edge"
               width={"24"}
             />{" "}
@@ -65,7 +71,7 @@ const ManejoCookies = () => {
             style={{ display: "flex", gap: "8px" }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"
+              src={logo_safari}
               alt="Safari"
               width={"24"}
             />{" "}
@@ -80,7 +86,7 @@ const ManejoCookies = () => {
             style={{ display: "flex", gap: "8px" }}
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg"
+              src={logo_opera}
               alt="Opera"
               width={"24"}
             />{" "}
