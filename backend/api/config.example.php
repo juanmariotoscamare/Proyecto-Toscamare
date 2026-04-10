@@ -10,11 +10,11 @@ return [
         'encryption' => 'tls',
     ],
     'pedidos' => [
-        'email_destino' => 'pedidos@cialtoscamare.es',
-        'password' => '7z3XPbY4XrecXML5DRwzvL3RUKeAdLp6',
+        'email_destino' => 'tu_email_pedidos@ejemplo.com',
+        'password' => 'tu_password_aqui',
     ],
     'contacto' => [
-        'email_destino' => 'administracion@cialtoscamare.es',
-        'password' => 'GAXGf8mW4psD7bPCm6VA64Ds5GJKY7FS',
+        'email_destino' => 'tu_email_contacto@ejemplo.com',
+        'password' => 'tu_password_aqui',
     ]
 ];
